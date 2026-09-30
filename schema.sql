@@ -1,0 +1,44 @@
+CREATE DATABASE IF NOT EXISTS assettrack;
+USE assettrack;
+
+CREATE TABLE IF NOT EXISTS bases (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS asset (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(120),
+ type VARCHAR(80),
+ base_name VARCHAR(100),
+ quantity INT,
+ status VARCHAR(40)
+);
+
+CREATE TABLE IF NOT EXISTS purchase (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ base_name VARCHAR(100),
+ equipment_type VARCHAR(80),
+ quantity INT,
+ created_at DATETIME,
+ supplier VARCHAR(150)
+);
+
+CREATE TABLE IF NOT EXISTS transfer (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ from_base VARCHAR(100),
+ to_base VARCHAR(100),
+ equipment_type VARCHAR(80),
+ quantity INT,
+ status VARCHAR(40),
+ created_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS audit_log (
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ username VARCHAR(100),
+ role VARCHAR(50),
+ action VARCHAR(100),
+ details VARCHAR(255),
+ created_at DATETIME
+);
